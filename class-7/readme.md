@@ -12,7 +12,7 @@
 1. `pwd`
 2. `cd`
 3. `ls -lsah`
-4. `clear` or ctrl + l
+4. `clear` or `ctrl + l`
 5. `mkdir <directory_name>`
 6. `rmdir <directory_name>`
 7. `whoami`
