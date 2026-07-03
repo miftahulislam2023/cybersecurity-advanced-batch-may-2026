@@ -1,6 +1,16 @@
 # Class 8
 
 ## Commands
+1. `rm <file_name>` (remove/delete files)
+2. `rm -rf <directory_name>` (forcefully and recursively remove directories and files)
+3. `rm -i <file_pattern>` (interactive removal, prompts before deleting)
+4. `cat <file1> <file2> ...` (concatenate and display multiple files or content)
+5. `*` (wildcard representing zero or more characters)
+6. `?` (wildcard representing exactly one character)
+7. `\` (escape character used to escape special characters in filenames)
+8. `more` & `less` (pagers used to view file content page by page)
+
+## Command Examples
 ```bash
 miftah@miftahcoding:~$ echo "I am"
 I am

@@ -17,6 +17,10 @@
 6. `rmdir <directory_name>`
 7. `whoami`
 8. `mkdir -p dir1/dir2/dir3`
+9. `echo "<text>"` (display a line of text)
+10. `cat <file_name>` (display file contents)
+11. `>` (redirect output, creating or overwriting a file)
+12. `>>` (redirect output, appending to an existing file)
 
 ## Important Directories
 1. / -> root directory
