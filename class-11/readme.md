@@ -13,7 +13,8 @@
   - htop
   - uptime
   - df -h -i
-  - free free -m
+  - free -m
+  - nload
 - Installing Softwares
   - sudo apt install apache
   - apt search install remove autoremove dist-upgrade
@@ -81,7 +82,6 @@
   - rsync -avz --dry-run
   - scp
 
-## Detailed Note
 ## ১. ওয়েব ফেচিং টুলস (cURL & wget)
 
 ### `curl` (Client URL)
@@ -261,10 +261,6 @@ alias dclean="docker system prune -a --volumes"
 
 ```
 
-
-
-
-
 ---
 
 ## ৪. সিস্টেম রিসোর্স ও স্টোরেজ মনিটরিং (System Usages)
@@ -285,7 +281,6 @@ alias dclean="docker system prune -a --volumes"
 
 * `free -m`:
 * *ইউজ কেস:* মেমোরি লিক চেক করা। র্যামের অবস্থা মেগাবাইটে দেখা। `available` কলামটি খেয়াল করতে হয়, যা দেখে বোঝা যায় নতুন কোনো প্রসেস (যেমন ডকার বা এনগিন্স) চালু করার মতো র্যাম আছে কিনা।
-
 
 
 ---
@@ -419,3 +414,62 @@ rsync -avz --dry-run ./dist/ user@192.168.1.10:/var/www/html/
 * `-v` (Verbose): টার্মিনালে লাইভ প্রগ্রেস ও ফাইলের নাম দেখায়।
 * `-z` (Compress): নেটওয়ার্ক লাইনে পাঠানোর আগে ডেটা জিপ বা কম্প্রেস করে নেয়, ফলে স্লো ইন্টারনেটেও দ্রুত ট্রান্সফার হয়।
 * `--dry-run` (সেফটি ফার্স্ট): প্রোডাকশনে কোনো ফাইল ওভাররাইট বা ডিলিট করার আগে এটি দিয়ে একটি ডামি রান করা হয়। এটি কমান্ডটি একচুয়ালি এক্সিকিউট না করে আপনাকে একটি রিপোর্ট দেবে যে কমান্ডটি চালালে কোন কোন ফাইল এফেক্টেড হতো। কোনো ভুল পাথ থাকলে তা ফাইল নষ্ট করার আগেই ধরা পড়ে যায়।
+
+## Bash
+```bash
+miftah@miftahcoding:~$ htop
+miftah@miftahcoding:~$ uptime
+ 22:11:58 up 5 min,  1 user,  load average: 0.07, 0.16, 0.09
+miftah@miftahcoding:~$ uptime
+ 22:12:15 up 6 min,  1 user,  load average: 0.36, 0.23, 0.11
+miftah@miftahcoding:~$ df
+Filesystem     1K-blocks     Used Available Use% Mounted on
+tmpfs             692388     2324    690064   1% /run
+/dev/vda2       19503340 10265376   8221900  56% /
+tmpfs            1730968        0   1730968   0% /dev/shm
+efivarfs             256       16       240   7% /sys/firmware/efi/efivars
+none                1024        0      1024   0% /run/credentials/systemd-journald.service
+none                1024        0      1024   0% /run/credentials/systemd-resolved.service
+/dev/vda1         973948     6680    967268   1% /boot/efi
+tmpfs            1730968        8   1730960   1% /tmp
+none                1024        0      1024   0% /run/credentials/serial-getty@ttyAMA0.service
+tmpfs             346192       84    346108   1% /run/user/1000
+miftah@miftahcoding:~$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           677M  2.3M  674M   1% /run
+/dev/vda2        19G  9.8G  7.9G  56% /
+tmpfs           1.7G     0  1.7G   0% /dev/shm
+efivarfs        256K   16K  240K   7% /sys/firmware/efi/efivars
+none            1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+none            1.0M     0  1.0M   0% /run/credentials/systemd-resolved.service
+/dev/vda1       952M  6.6M  945M   1% /boot/efi
+tmpfs           1.7G  8.0K  1.7G   1% /tmp
+none            1.0M     0  1.0M   0% /run/credentials/serial-getty@ttyAMA0.service
+tmpfs           339M   84K  338M   1% /run/user/1000
+miftah@miftahcoding:~$ df -i
+Filesystem      Inodes  IUsed   IFree IUse% Mounted on
+tmpfs           819200   1182  818018    1% /run
+/dev/vda2      1250928 179720 1071208   15% /
+tmpfs           432742      1  432741    1% /dev/shm
+efivarfs             0      0       0     - /sys/firmware/efi/efivars
+none              1024      1    1023    1% /run/credentials/systemd-journald.service
+none              1024      1    1023    1% /run/credentials/systemd-resolved.service
+/dev/vda1            0      0       0     - /boot/efi
+tmpfs          1048576     54 1048522    1% /tmp
+none              1024      1    1023    1% /run/credentials/serial-getty@ttyAMA0.service
+tmpfs            86548    155   86393    1% /run/user/1000
+miftah@miftahcoding:~$ free
+               total        used        free      shared  buff/cache   available
+Mem:         3461936     2066352      316584      219360     1451240     1395584
+Swap:        3163132       21432     3141700
+miftah@miftahcoding:~$ free -m
+               total        used        free      shared  buff/cache   available
+Mem:            3380        2018         309         214        1417        1362
+Swap:           3088          20        3068
+miftah@miftahcoding:~$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           3.3Gi       2.0Gi       310Mi       214Mi       1.4Gi       1.3Gi
+Swap:          3.0Gi        20Mi       3.0Gi
+miftah@miftahcoding:~$ c
+
+```
