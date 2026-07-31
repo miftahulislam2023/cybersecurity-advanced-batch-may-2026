@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Linux Commands Cheat Sheet | What The Hack</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Linux Commands Cheat Sheet" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A collection of challenge based hack-a-thons including student guide, coach guide, lecture presentations, sample/instructional code and templates. Please visit the What The Hack website at: https://aka.ms/wth" />
+<meta property="og:description" content="A collection of challenge based hack-a-thons including student guide, coach guide, lecture presentations, sample/instructional code and templates. Please visit the What The Hack website at: https://aka.ms/wth" />
+<link rel="canonical" href="https://microsoft.github.io/WhatTheHack/020-LinuxFundamentals/Student/resources/commands.html" />
+<meta property="og:url" content="https://microsoft.github.io/WhatTheHack/020-LinuxFundamentals/Student/resources/commands.html" />
+<meta property="og:site_name" content="What The Hack" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Linux Commands Cheat Sheet" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A collection of challenge based hack-a-thons including student guide, coach guide, lecture presentations, sample/instructional code and templates. Please visit the What The Hack website at: https://aka.ms/wth","headline":"Linux Commands Cheat Sheet","url":"https://microsoft.github.io/WhatTheHack/020-LinuxFundamentals/Student/resources/commands.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/WhatTheHack/assets/css/style.css?v=1000b8df5e32cd55da5df55207a14a8f6d4a33e5">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="/WhatTheHack/assets/js/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="/WhatTheHack/assets/css/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <!--h1>What The Hack</h1-->
+          <!--p>A collection of challenge based hack-a-thons including student guide, coach guide, lecture presentations, sample/instructional code and templates.  Please visit the What The Hack website at: https://aka.ms/wth</p-->
+          <img src="/WhatTheHack/assets/images/wth-logo.png">
+        </div>
+
+        <h1 id="linux-commands-cheat-sheet">Linux Commands Cheat Sheet</h1>
+
+<p>The command line terminal in Linux is the operating system’s most powerful component. However, due to the sheer amount of commands available, it can be intimidating for newcomers. Even longtime users may forget a command every once in a while and that is why we have created this Linux cheat sheet commands guide.</p>
+
+<p>In this page, we’ll present you with a curated list of the most handy Linux commands.</p>
+
+<p><em>Please note that those commands are for Linux in general, both RedHat-like and Debian-like distributions. There are some commands in the Package management session which may be specific for Redhat-based such as yum and rpm which do not work in Ubuntu (Debian-based).</em></p>
+
+<h2 id="file-commands">File Commands</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ls</code></td>
+      <td>List files in the directory</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ls -a</code></td>
+      <td>List all files (shows hidden files)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">locate [name]</code></td>
+      <td>Find all files and directories related to a particular name:</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pwd</code></td>
+      <td>Show directory you are currently working in</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mkdir [directory]</code></td>
+      <td>Create a new directory</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rm [file_name]</code></td>
+      <td>Remove a file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rm -r [directory_name]</code></td>
+      <td>Remove a directory recursively</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rm -rf [directory_name]</code></td>
+      <td>Recursively remove a directory without requiring confirmation</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cp [file_name1] [file_name2]</code></td>
+      <td>Copy the contents of one file to another file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cp -r [directory_name1] [directory_name2]</code></td>
+      <td>Recursively copy the contents of one file to a second file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mv [file_name1] [file_name2]</code></td>
+      <td>Rename [file_name1] to [file_name2] with the command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ln -s /path/to/[file_name] [link_name]</code></td>
+      <td>Create a symbolic link to a file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">touch [file_name]</code></td>
+      <td>Create a new file using touch</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">more [file_name]</code></td>
+      <td>Show the contents of a file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cat [file_name]</code></td>
+      <td>or use the cat command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cat [file_name1] &gt;&gt; [file_name2]</code></td>
+      <td>Append file contents to another file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">head [file_name]</code></td>
+      <td>Display the first 10 lines of a file with head command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tail [file_name]</code></td>
+      <td>Show the last 10 lines of a file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">wc</code></td>
+      <td>Show the number of words, lines, and bytes in a file using wc</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ls \| xargs wc</code></td>
+      <td>List number of lines/words/characters in each file in a directory with the xargs command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cut -d[delimiter] [filename]</code></td>
+      <td>Cut a section of a file and print the result to standard output</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[data] \| cut -d[delimiter]</code></td>
+      <td>Cut a section of piped data and print the result to standard output</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">awk '[pattern] {print $0}' [filename]</code></td>
+      <td>Print all lines matching a pattern in a file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">diff [file1] [file2]</code></td>
+      <td>Compare two files and display differences</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">source [filename]</code></td>
+      <td>Read and execute the file content in the current shell</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[command] \| tee [filename] &gt;/dev/null</code></td>
+      <td>Store the command output in a file and skip the terminal output</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="searching">Searching</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">grep [pattern] [file_name]</code></td>
+      <td>Search for a specific pattern in a file with grep</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">grep -r [pattern] [directory_name]</code></td>
+      <td>Recursively search for a pattern in a directory:</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">locate [name]</code></td>
+      <td>Find all files and directories related to a particular name:</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find [/folder/location] -name [a]</code></td>
+      <td>List names that begin with a specified character [a] in a specified location [/folder/location] by using the find command:</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find [/folder/location] -size [+100M]</code></td>
+      <td>See files larger than a specified size [+100M] in a folder:</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="directory-navigation">Directory Navigation</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tar cf [compressed_file.tar] [file_name]</code></td>
+      <td>Archive an existing file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tar xf [compressed_file.tar]</code></td>
+      <td>Extract an archived file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tar czf [compressed_file.tar.gz]</code></td>
+      <td>Create a gzip compressed tar file by running</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gzip [file_name]</code></td>
+      <td>Compress a file with the .gz extension</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="file-transfer">File Transfer</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">scp [file_name.txt] [server/tmp]</code></td>
+      <td>Copy a file to a server directory securely using the Linux scp command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rsync -a [/your/directory] [/backup/] </code></td>
+      <td>Synchronize the contents of a directory with a backup directory using the rsync command</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="users-and-groups">Users and Groups</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">id</code></td>
+      <td>See details about the active users</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">last</code></td>
+      <td>Show last system logins</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">who</code></td>
+      <td>Display who is currently logged into the system with the who command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">w</code></td>
+      <td>Show which users are logged in and their activity</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">groupadd [group_name]</code></td>
+      <td>Add a new group by typing</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">adduser [user_name]</code></td>
+      <td>Add a new user</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">usermod -aG [group_name] [user_name]</code></td>
+      <td>Add a user to a group</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sudo [command_to_be_executed_as_superuser]</code></td>
+      <td>Temporarily elevate user privileges to superuser or root using the sudo command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">userdel [user_name] </code></td>
+      <td>Delete a user</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">usermod</code></td>
+      <td>Modify user information with</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">chgrp [group-name] [directory-name]</code></td>
+      <td>Change directory group</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="package-management">Package management</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">yum list installed</code></td>
+      <td>List all installed packages with yum</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">yum search [keyword]</code></td>
+      <td>Find a package by a related keyword</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">yum info [package_name]</code></td>
+      <td>Show package information and summary</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">yum install [package_name.rpm]</code></td>
+      <td>Install a package using the YUM package manager</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dnf install [package_name.rpm]</code></td>
+      <td>Install a package using the DNF package manager</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">apt install [package_name]</code></td>
+      <td>Install a package using the APT package manager</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rpm -i  [package_name.rpm]</code></td>
+      <td>Install an .rpm package from a local file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rpm -e [package_name.rpm]</code></td>
+      <td>Remove an .rpm package</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dpkg -i [package_name.deb]</code></td>
+      <td>Install an .deb package from a local file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dpkg -r [package_name.deb]</code></td>
+      <td>Remove an .deb package</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tar zxvf [source_code.tar.gz] &amp;&amp; cd [source_code] &amp;&amp; ./configure &amp;&amp; make &amp;&amp; make install</code></td>
+      <td>Install software from source code</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="process-management">Process management</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ps</code></td>
+      <td>See a snapshot of active processes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pstree</code></td>
+      <td>Show processes in a tree-like diagram</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pmap</code></td>
+      <td>Display a memory usage map of processes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">top</code></td>
+      <td>See all running processes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">kill [process_id]</code></td>
+      <td>Terminate a Linux process under a given ID</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pkill [proc_name]</code></td>
+      <td>Terminate a process under a specific name</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">killall [proc_name</code></td>
+      <td>Terminate all processes labelled “proc”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">bg</code></td>
+      <td>List and resume stopped jobs in the background</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">fg</code></td>
+      <td>Bring the most recently suspended job to the foreground</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">fg [job]</code></td>
+      <td>Bring a particular job to the foreground</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">lsof</code></td>
+      <td>List files opened by running processes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">trap "[commands-to-execute-on-trapping]" [signal]</code></td>
+      <td>Catch a system error signal in a shell script</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">wait</code></td>
+      <td>Pause terminal or a Bash script until a running process is completed</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">nohup [command] &amp;</code></td>
+      <td>Run a Linux process in the background</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="system-management-and-information">System Management and Information</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">uname -r</code></td>
+      <td>Show system information</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">uname -a</code></td>
+      <td>See kernel release information</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">uptime </code></td>
+      <td>Display how long the system has been running, including load average</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hostname</code></td>
+      <td>See system hostname</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hostname -i</code></td>
+      <td>Show the IP address of the system</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">last reboot</code></td>
+      <td>List system reboot history</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">date</code></td>
+      <td>See current time and date</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">timedatectl </code></td>
+      <td>Query and change the system clock with</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cal</code></td>
+      <td>Show current calendar (month and day)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">whoami</code></td>
+      <td>See which user you are using</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">finger [username]</code></td>
+      <td>Show information about a particular user</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ulimit [flags] [limit]</code></td>
+      <td>View or limit system resource amounts</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">shutdown [hh:mm]</code></td>
+      <td>Schedule a system shutdown</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">shutdown now</code></td>
+      <td>Shut Down the system immediately</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="disk-usage">Disk Usage</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">df -h</code></td>
+      <td>See free and used space on mounted systems</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">df -i</code></td>
+      <td>Show free inodes on mounted filesystems</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">fdisk -l</code></td>
+      <td>Display disk partitions, sizes, and types with the command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">du -ah</code></td>
+      <td>See disk usage for all files and directory</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">du -sh</code></td>
+      <td>Show disk usage of the directory you are currently in</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">findmnt</code></td>
+      <td>Display target mount point for all filesystem</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mount [device_path] [mount_point]</code></td>
+      <td>Mount a device</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="ssh-login">SSH Login</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ssh user@host</code></td>
+      <td>Connect to host as user</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ssh host</code></td>
+      <td>Securely connect to host via SSH default port 22</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ssh -p [port] user@host</code></td>
+      <td>Connect to host using a particular port</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="file-permission">File Permission</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">chmod 777 [file_name]</code></td>
+      <td>Assign read, write, and execute permission to everyone</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">chmod 755 [file_name]</code></td>
+      <td>Give read, write, and execute permission to owner, and read and execute permission to group and others</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">chmod 766 [file_name]</code></td>
+      <td>Assign full permission to owner, and read and write permission to group and others</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">chown [user] [file_name]</code></td>
+      <td>Change the ownership of a file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">chown [user]:[group] [file_name]</code></td>
+      <td>Change the owner and group ownership of a file</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="network">Network</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ip addr show</code></td>
+      <td>List IP addresses and network interfaces</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ip address add [IP_address]</code></td>
+      <td>Assign an IP address to interface eth0</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ifconfig</code></td>
+      <td>Display IP addresses of all network interfaces with</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">netstat -pnltu</code></td>
+      <td>See active (listening) ports with the netstat command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">netstat -nutlp</code></td>
+      <td>Show tcp and udp ports and their programs</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">whois [domain]</code></td>
+      <td>Display more information about a domain</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dig [domain] </code></td>
+      <td>Show DNS information about a domain using the dig command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dig -x host</code></td>
+      <td>Do a reverse lookup on domain</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dig -x [ip_address]</code></td>
+      <td>Do reverse lookup of an IP address</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">host [domain]</code></td>
+      <td>Perform an IP lookup for a domain</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hostname -I</code></td>
+      <td>Show the local IP address</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">wget [file_name]</code></td>
+      <td>Download a file from a domain using the wget command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">nslookup [domain-name]</code></td>
+      <td>Receive information about an internet domain</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">curl -O [file-url]</code></td>
+      <td>Save a remote file to your system using the filename that corresponds to the filename on the server</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="variables">Variables</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">let "[variable]=[value]"</code></td>
+      <td>Assign an integer value to a variable</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">export [variable-name]</code></td>
+      <td>Export a Bash variable</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">declare [variable-name]= "[value]"</code></td>
+      <td>Declare a Bash variable</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">set</code></td>
+      <td>List the names of all the shell variables and functions</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">echo $[variable-name]</code></td>
+      <td>Display the value of a variable</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="shell-command-management">Shell Command Management</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">alias [alias-name]='[command]'</code></td>
+      <td>Create an alias for a command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">watch -n [interval-in-seconds] [command]</code></td>
+      <td>Set a custom interval to run a user-defined command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sleep [time-interval] &amp;&amp; [command]</code></td>
+      <td>Postpone the execution of a command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">at [hh:mm]</code></td>
+      <td>Create a job to be executed at a certain time (Ctrl+D to exit prompt after you type in the command)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">man [command]</code></td>
+      <td>Display a built-in manual for a command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">history</code></td>
+      <td>Print the history of the commands you used in the terminal</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="linux-keyboard-shortcuts">Linux Keyboard Shortcuts</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl + C</code></td>
+      <td>Kill process running in the terminal</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl + Z</code></td>
+      <td>Stop current process - The process can be resumed in the foreground with <code class="language-plaintext highlighter-rouge">fg</code> or in the background with <code class="language-plaintext highlighter-rouge">bg</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl + W</code></td>
+      <td>Cut one word before the cursor and add it to clipboard</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl + U</code></td>
+      <td>Cut part of the line before the cursor and add it to clipboard</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl + K</code></td>
+      <td>Cut part of the line after the cursor and add it to clipboard</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl + Y</code></td>
+      <td>Paste from clipboard</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl + R</code></td>
+      <td>Recall last command that matches the provided characters</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl + O</code></td>
+      <td>Run the previously recalled command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl + G</code></td>
+      <td>Exit command history without running a command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">!!</code></td>
+      <td>Run the last command again</td>
+    </tr>
+    <tr>
+      <td>`Ctrl + D</td>
+      <td>Log out of current session</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="hardware-information">Hardware information</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dmesg</code></td>
+      <td>Show bootup messages</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cat /proc/cpuinfo</code></td>
+      <td>See CPU information</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">free -h</code></td>
+      <td>Display free and used memory</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">lshw</code></td>
+      <td>List hardware configuration information</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">lsblk</code></td>
+      <td>See information about block devices</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">lspci -tv</code></td>
+      <td>Show PCI devices in a tree-like diagram</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dmidecode</code></td>
+      <td>Show hardware information from the BIOS</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hdparm -i /dev/disk</code></td>
+      <td>Display disk data information</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hdparm -tT /dev/[device]</code></td>
+      <td>Conduct a read-speed test on device/disk</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">fsck [disk-or-partition-location]</code></td>
+      <td>Run a disk check on an unmounted disk or partition</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+      </section>
+
+    </div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E7MV34DNDL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-E7MV34DNDL');
+      gtag('config', 'UA-173162534-1');
+    </script>
+  </body>
+</html>

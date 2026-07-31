@@ -1,165 +1,67 @@
 # Class 11
 
 ## Today's Topic
-- cURL & wget
-  - curl https://google.com
-  - wget https://miftahcoding.com
 - Pipelines (cat, sort, uniq, grep, head, tail, tee)
   - grep -v -n -c \* -r
   - tail -f -n
 - Working with Commands (type, which, man, whatis, alias)
+  - which -> show path of a command
+  - type -> show type of a command
+  - man -> show manual of a command
+  - whatis -> show one-line description of a command
+  - alias -> create an alias for a command
 - System Usages
   - top
   - htop
+  - btop
   - uptime
   - df -h -i
   - free -m
   - nload
 - Installing Softwares
   - sudo apt install apache
-  - apt search install remove autoremove dist-upgrade
+  - apt
+    - search -> package search in repositories
+    - install -> install a package
+    - remove -> remove a package
+    - autoremove -> remove unnecessary packages
+    - dist-upgrade -> upgrade the system
+    - show [package-name] -> show information about a package
 - Text Editing Basic
-  - nano +20
-- Systemd
-  - systemctl start stop enable disable restart
-- User, Group & Permission Management
-  - groups
-  - adduser
-  - su - username
-  - passwd username
-  - logout
-  - userdel -r username
-  - groupadd groupname
-  - groupdel -r groupname
-  - sudo usermod -aG groupname username
-  - sudo gpasswd -d username groupname
-  - exit logout sudo su -
-  - /etc/passwd
-  - /etc/shadow
-  - /etc/group
-- history
-  - !number
-- $?
+  - nano
+  - vim
+  - mousepad
 - find
-  - -name
-  - -type (d, f, l)
-  - -iname
-  - -size
-  - -mtime
-  - -user
-  - -group
-- journalctl
-  - -u apache
-  - -f
-- !!
-- $! $? $$ $# $0
-- Package Management
-  - sudo apt update
-  - sudo apt upgrade
-  - sudo apt full-upgrade
-  - sudo apt remove apache
-  - sudo apt autoremove
-  - sudo apt search apache
-- Variables
-  - NAME="Miftahul"
-  - VARIABLE_NAME="VALUE"
-  - echo $NAME
-  - echo NAME (wrong)
-  - echo ${NAME}
-  - echo ${NAME:0:5}
-  - env
-  - export PATH="/usr/games:$PATH"
-  - export myvar="value"
-  - unset myvar
-- SSH, SCP & rsync
-  - sudo netstat -tulpn
-  - systemctl status ssh
-  - sudo apt install openssh-server
-  - ip a
-  - /etc/ssh/sshd_config
-    - PermitRootLogin no
-    - PasswordAuthentication no
-  - rsync -avz --dry-run
-  - scp
+  - -name -> search by name
+  - -type (d, f, l) -> search by type (directory, file, link)
+  - -iname -> search by name (case-insensitive)
+  - -size -> search by size
+  - -mtime -> search by modification time
+  - -user -> search by user
+  - -group -> search by group
 
-## ১. ওয়েব ফেচিং টুলস (cURL & wget)
+## Bash Shortcuts
+### Navigation Shortcuts
+- Ctrl + A : Move to the beginning of the line
+- Ctrl + E : Move to the end of the line
+- Ctrl + B : Move back one character
+- Ctrl + F : Move forward one character
+- Alt + B : Move back one word
+- Alt + F : Move forward one word
+### Editing Shortcuts
+- Ctrl + U : Cut/delete text from the cursor to the beginning of the line
+- Ctrl + K : Cut/delete text from the cursor to the end of the line
+- Ctrl + W : Cut/delete the word before the cursor
+- Ctrl + Y : Paste the last cut text
+- Ctrl + L : Clear the terminal screen
+- Ctrl + C : Terminate the currently running command
+### History Shortcuts
+- Ctrl + R : Search command history (reverse search)
+- Ctrl + G : Exit history search mode
+- Ctrl + P : Go to the previous command in history
+- Ctrl + N : Go to the next command in history
 
-### `curl` (Client URL)
-
-* **কমান্ডের অর্থ:** এটি একটি কমান্ড-লাইন টুল যা বিভিন্ন নেটওয়ার্ক প্রোটোকল (HTTP, HTTPS, FTP ইত্যাদি) ব্যবহার করে সার্ভারে ডেটা পাঠাতে বা সার্ভার থেকে ডেটা রিট্রিভ করতে ব্যবহৃত হয়। এটি মূলত ব্যাকএন্ড এপিআই টেস্টিং এবং সার্ভার রেসপন্স চেক করার জন্য ডেভেলপারের প্রথম পছন্দ।
-* **গভীর ব্যাখ্যা:** `curl` বাইনাকুলারের মতো কাজ করে। এটি নির্দিষ্ট ইউআরএল-এ হিট করে সার্ভার যা ফেরত দেয় (যেমন কাঁচা HTML, JSON বা এক্সএমএল), তা প্রসেস না করে সরাসরি আপনার টার্মিনাল স্ক্রিনে আছড়ে ফেলে।
-* **সবচেয়ে বেশি ব্যবহৃত অপশনসমূহ:**
-* `-o <ফাইল_নাম>`: আউটপুট স্ক্রিনে না দেখিয়ে সরাসরি ফাইলে সেভ করে।
-* `-I` (বা `--head`): অ্যাপ্লিকেশনের বডি বাদ দিয়ে শুধু HTTP রেসপন্স হেডার (Status Code, Content-Type, Cookies) দেখায়।
-* `-L`: যদি ইউআরএলটি ৩০১ বা ৩০২ কোড দিয়ে রিডাইরেক্ট করা থাকে, তবে এটি স্বয়ংক্রিয়ভাবে ফাইনাল ডেস্টিনেশনে চলে যায়।
-* `-X`: HTTP মেথড (GET, POST, PUT, DELETE) নির্দিষ্ট করে।
-* `-d`: POST রিকোয়েস্টের সাথে ডেটা বা পেলোড পাঠানোর জন্য।
-
-
-* **বাস্তবসম্মত উদাহরণ ও ইউজ কেস:**
-* *ইউজ কেস ১ (API টেস্ট করা):* একটি ব্যাকএন্ড এপিআই ঠিকঠাক JSON ডেটা দিচ্ছে কিনা তা চেক করা।
-```bash
-curl -X GET https://jsonplaceholder.typicode.com/posts/1
-
-```
-
-
-* *ইউজ কেস ২ (সার্ভার হেডার চেক):* আপনার সাইটে SSL বা Nginx ঠিকঠাক রেসপন্স করছে কিনা তা দেখা।
-```bash
-curl -I https://miftahcoding.com
-
-```
-
-
-* *ইউজ কেস ৩ (ফাইল ডাউনলোড ও নাম পরিবর্তন):* নেট থেকে স্ক্রিপ্ট ডাউনলোড করে নির্দিষ্ট নামে রাখা।
-```bash
-curl -o setup.sh https://example.com/installer.sh
-
-```
-
-
-
-
-
-### `wget`
-
-* **কমান্ডের অর্থ:** "World Wide Web Get"। এটি নেটওয়ার্ক থেকে ফাইল ডাউনলোডের একটি ডেডিকেটেড নন-ইন্টারেক্টিভ ইউটিলিটি।
-* **গভীর ব্যাখ্যা:** `curl` যেখানে ডেটা আদান-প্রদান আর ডিসপ্লে নিয়ে কাজ করে, `wget` সেখানে ব্যাকগ্রাউন্ডে শান্তভাবে বড় ফাইল ডাউনলোড বা পুরো ডিরেক্টরি ক্লোন করার মাস্টার। ইন্টারনেট কানেকশন ড্রপ করলেও এটি ফাইল নষ্ট না করে ডাউনলোড ধরে রাখতে পারে।
-* **সবচেয়ে বেশি ব্যবহৃত অপশনসমূহ:**
-* `-c` (বা `--continue`): ভেঙে যাওয়া বা পজ হওয়া ডাউনলোড ঠিক যেখান থেকে বন্ধ হয়েছিল সেখান থেকে শুরু করে।
-* `-b`: ডাউনলোড প্রসেসটি ব্যাকগ্রাউন্ডে পাঠিয়ে দেয় (একটি লগ ফাইলে প্রগ্রেস সেভ হয়)।
-* `-r`: রিকার্সিভ ডাউনলোড। একটি ওয়েবসাইটের সব ইন্টারনাল লিঙ্ক ধরে ধরে সব ফাইল নামিয়ে ফেলে।
-* `--limit-rate=<গতি>`: ডাউনলোডের স্পিড লিমিট করে দেয় যাতে পুরো অফিসের ব্যান্ডউইথ একা শেষ না হয়।
-
-
-* **বাস্তবসম্মত উদাহরণ ও ইউজ কেস:**
-* *ইউজ কেস ১ (বড় ISO বা জিপ ফাইল ডাউনলোড):* সার্ভারে ৫ জিবির একটি ডেটাবেস ব্যাকআপ নামানো।
-```bash
-wget -c https://example.com/backup-2026.zip
-
-```
-
-
-* *ইউজ কেস ২ (ব্যান্ডউইথ কন্ট্রোল করে ব্যাকগ্রাউন্ডে ডাউনলোড):* ১ মেগাবাইটের বেশি স্পিড না নিয়ে ব্যাকগ্রাউন্ডে কাজ চালানো।
-```bash
-wget -b --limit-rate=1m https://example.com/large-dataset.tar.gz
-
-```
-
-
-* *ইউজ কেস ৩ (অফলাইন ওয়েবসাইট মিররিং):* পুরো সাইটের এইচটিএমএল, ইমেজ অফলাইনে পড়ার জন্য ডাউনলোড।
-```bash
-wget -r https://miftahcoding.com
-
-```
-
-
-
-
-
----
-
-## ২. পাইপলাইন এবং টেক্সট প্রসেসিং (Pipelines & Text Processing)
+## পাইপলাইন এবং টেক্সট প্রসেসিং (Pipelines & Text Processing)
 
 ### পাইপলাইন (`|`) এর মেকানিজম
 
@@ -233,7 +135,7 @@ grep -rn "auth" --exclude-dir=node_modules .
 
 ---
 
-## ৩. কমান্ড ইন্সপেকশন ও শর্টকাটস (Working with Commands)
+## কমান্ড ইন্সপেকশন ও শর্টকাটস (Working with Commands)
 
 * `type`: শেল কীভাবে একটি কমান্ডকে চেনে তা নির্ধারণ করে। লিনাক্সে কমান্ড ৪ রকম হতে পারে: alias, keyword, function, builtin, অথবা এক্সটার্নাল ফাইল।
 * *উদাহরণ:* `type ll` -> `ll is aliased to ls -l`
@@ -263,7 +165,7 @@ alias dclean="docker system prune -a --volumes"
 
 ---
 
-## ৪. সিস্টেম রিসোর্স ও স্টোরেজ মনিটরিং (System Usages)
+## সিস্টেম রিসোর্স ও স্টোরেজ মনিটরিং (System Usages)
 
 * `top`: লিনাক্সের ডিফল্ট টাস্ক ম্যানেজার। প্রসেসগুলো কত সিপিইউ আর র্যাম খাচ্ছে তা লাইভ দেখায়। (টার্মিনেট করতে `q` চাপতে হয়)।
 * `htop`: `top` এর আধুনিক রূপ।
@@ -285,7 +187,7 @@ alias dclean="docker system prune -a --volumes"
 
 ---
 
-## ৫. বেসিক টেক্সট এডিটিং
+## বেসিক টেক্সট এডিটিং
 
 * `nano +20 /etc/nginx/nginx.conf`
 * **ইউজ কেস:** যখন সিস্টেম লগ বা কম্পাইলার বলে "Line 20: Syntax Error", তখন ফাইলে ঢুকে স্ক্রোল করে ২০ নম্বর লাইন খোঁজার দরকার নেই। এই কমান্ড সরাসরি কনফিগারেশন ফাইলের ২০ নম্বর লাইনে কার্সার নিয়ে এডিটর ওপেন করবে।
@@ -294,55 +196,7 @@ alias dclean="docker system prune -a --volumes"
 
 ---
 
-## ৬. সিস্টেমডি ও সার্ভিস কন্ট্রোল (Systemd)
-
-লিনাক্স বুট হওয়ার পর ব্যাকগ্রাউন্ডের সব সার্ভিস (Nginx, MySQL, SSH) কন্ট্রোল করে `systemd`। এর মূল কমান্ড `systemctl`।
-
-* `sudo systemctl start nginx`: সার্ভিসটি তাৎক্ষণিক মেমোরিতে রান করায়।
-* `sudo systemctl stop nginx`: সার্ভিসটি মেমোরি থেকে রিমুভ করে প্রসেস বন্ধ করে।
-* `sudo systemctl restart nginx`: সার্ভিসটি বন্ধ করে আবার চালু করে। কনফিগারেশনে বড় পরিবর্তন আনলে এটি করতে হয় (সামান্য ডাউনটাইম হয়)।
-* `sudo systemctl reload nginx`: ডাউনটাইম ছাড়া ব্যাকগ্রাউন্ডে কনফিগারেশন ফাইল রি-রিড করে। প্রোডাকশন লাইভ সার্ভারে `restart` এর চেয়ে `reload` করা নিরাপদ।
-* `sudo systemctl enable nginx`: সার্ভারের মেইন পাওয়ার বা রিবুট দেওয়া হলে সার্ভিসটি যেন নিজ থেকে স্টার্ট নেয় (বুট সার্ভিস)।
-* `sudo systemctl disable nginx`: রিবুট হলে অটো-স্টার্ট হবে না।
-
----
-
-## ৭. ইউজার, গ্রুপ ও পারমিশন ম্যানেজমেন্ট
-
-### আর্কিটেকচার ফাইলস:
-
-1. `/etc/passwd`: ফরম্যাট: `username:x:UID:GID:Comment:Home_Dir:Shell`
-2. `/etc/shadow`: পাসওয়ার্ডের সল্টেড SHA-512 হ্যাশ থাকে। হ্যাকাররা এই ফাইল টার্গেট করে।
-3. `/etc/group`: সিস্টেমে তৈরি সব গ্রুপ এবং তাদের মেম্বারদের লিস্ট।
-
-### কমান্ড ও বাস্তব ইউজ কেস:
-
-* `adduser devuser`: সিস্টেমে নতুন ডেভেলপার জয়েন করলে তার জন্য প্রোফাইল তৈরি।
-* `su - devuser`: রুট বা অন্য অ্যাকাউন্ট থেকে `devuser` অ্যাকাউন্টে সুইচ করা (লগইন এনভায়রনমেন্টসহ)।
-* `passwd devuser`: ইউজারের পাসওয়ার্ড রিসেট করা।
-* `userdel -r devuser`: ডেভেলপার কোম্পানি ছেড়ে দিলে তার হোম ডিরেক্টরিসহ সমস্ত ডেটা মুছে ফেলা।
-* `groupadd sysadmins`: সিস্টেম অ্যাডমিনদের জন্য নতুন গ্রুপ তৈরি।
-* `usermod -aG sysadmins devuser`: `devuser` কে `sysadmins` গ্রুপে যুক্ত করা (যাতে সে সুডো বা অ্যাডমিন পাওয়ার পায়)। `-a` না দিলে সে অন্য সব গ্রুপ থেকে বাদ পড়ে যাবে।
-* `gpasswd -d devuser sysadmins`: সিকিউরিটি ভায়োলেশনের কারণে ইউজারকে গ্রুপ থেকে প্রমোশন বাতিল বা রিমুভ করা।
-
----
-
-## ৮. হিস্ট্রি এবং স্পেশাল ভেরিয়েবলস (History & Special Variables)
-
-* `history` এবং `!number`: আপনি ৫০ কমান্ড আগে একটি জটিল ডকার কমান্ড লিখেছিলেন যা এখন মনে নেই। `history | grep docker` দিয়ে নম্বরটি (ধরি ১০৫) বের করে `!105` চাপলেই সেটি আবার রান হবে।
-
-### স্পেশাল ভেরিয়েবল ইউজ কেস (শেল স্ক্রিপ্টিং ও অটোমেশন)
-
-* `$?`: আগের কমান্ডের সাকসেস/ফেইলর স্ট্যাটাস।
-* *ইউজ কেস:* `mkdir /root/test`. এরপর `echo $?` দিলে যদি `1` বা অন্য কিছু আসে, তার মানে পারমিশন ডিনাইড বা এরর হয়েছে। স্ক্রিপ্টিংয়ে এটি দিয়ে ইফ-এলস (If-Else) লজিক লেখা হয়।
-
-
-* `$$`: বর্তমান শেলের প্রসেস আইডি।
-* `$!`: ব্যাকগ্রাউন্ডে পাঠানো লাস্ট প্রসেসের পিআইডি। (যেমন: `node server.js &` চালানোর পর `$!` দিয়ে ওই নোড অ্যাপের পিআইডি ট্র্যাক করা যায়)।
-
----
-
-## ৯. ফাইন্ড টুল (`find`)
+## ফাইন্ড টুল (`find`)
 
 ফাইল খোঁজার জন্য এটি লিনাক্সের সবচেয়ে শক্তিশালী জাদুকরী টুল।
 
@@ -352,68 +206,187 @@ alias dclean="docker system prune -a --volumes"
 * `find /tmp -type f -size +100M`: ১ মাসের পুরানো বা ১০০ মেগাবাইটের বড় ক্যাশ ফাইল খুঁজে বের করে ডিস্ক খালি করার জন্য টার্গেট করা।
 * `find /var/www -user miftah`: নির্দিষ্ট ইউজারের পারমিশনে থাকা ফাইলগুলো আইসোলেট করা।
 
----
+লিনাক্স (Linux) এবং ইউনিক্স-ভিত্তিক সিস্টেমে ফাইল বা ডিরেক্টরি খুঁজে বের করার জন্য **`find`** কমান্ড সবচেয়ে পাওয়ারফুল ও গুরুত্বপূর্ণ একটি টুল।
 
-## ১০. জার্নাল লগ অ্যানালাইসিস (`journalctl`)
-
-Systemd সার্ভিসের বাইনারি লগ রিড করার মডার্ন কমান্ড।
-
-* `journalctl -u apache2 -n 100`: অ্যাপাচি সার্ভারের শেষ ১০০টি লগের লাইন নিখুঁতভাবে প্রিন্ট করবে।
-* `journalctl -u apache2 -f`: লাইভ ট্রাফিক বা রিকোয়েস্ট এরর মনিটর করার জন্য স্ক্রিন লক করে রাখবে।
+বেসিক থেকে অ্যাডভান্সড পর্যন্ত **`find`** কমান্ড ব্যবহারের একটি পূর্ণাঙ্গ গাইড নিচে দেয়া হলো:
 
 ---
 
-## ১১. এনভায়রনমেন্ট ভেরিয়েবলস (Environment Variables)
+### ১. Basic Usage (প্রাথমিক ব্যবহার)
 
-* `NAME="Miftahul"` -> এটি লোকাল ভেরিয়েবল। এটি শুধু বর্তমান টার্মিনাল চেনে। এর কোনো চাইল্ড প্রসেস বা নোড/পাইথন স্ক্রিপ্ট একে রিড করতে পারবে না।
-* `export DB_HOST="localhost"` -> এটি গ্লোবাল এনভায়রনমেন্ট ভেরিয়েবল। এখন এই টার্মিনাল থেকে কোনো প্রোজেক্ট রান করলে কোডের ভেতর `process.env.DB_HOST` এটি এক্সেস করতে পারবে।
-* `${NAME:0:5}` -> স্ট্রিং ম্যানিপুলেশন। লিনাক্স শেলের ভেতরেই কোনো থার্ডপার্টি টুল ছাড়া স্ট্রিং স্লাইস করা।
-* `export PATH="/usr/games:$PATH"`:
-* **মাস্টার কনসেপ্ট:** যখন আপনি টার্মিনালে `node` বা `git` লেখেন, সিস্টেম জাদুর মতো তা রান করে কারণ তার বাইনারি ফাইলটি `$PATH` ভেরিয়েবলের ভেতরে থাকা ফোল্ডারগুলোতে লিস্টিং করা আছে। আপনি যখন নতুন কোনো সফটওয়্যার বা গেমস কাস্টম পাথে ইন্সটল করেন, তখন তার পাথটি এখানে অ্যাপেন্ড করে দিতে হয়, যাতে সিস্টেম তাকে গ্লোবালি চিনতে পারে।
+`find` কমান্ডের সাধারণ সিনট্যাক্স:
 
-
-
----
-
-## ১২. নেটওয়ার্কিং, রিমোট অ্যাক্সেস এবং সিকিউর সিঙ্ক
-
-### নেটওয়ার্ক অডিট
-
-* `ip a`: ইন্টারফেসের লাইভ আইপি (LAN/WAN) এবং ম্যাক অ্যাড্রেস চেক করা।
-* `sudo netstat -tulpn`:
-* *সিনারিও:* আপনি নোড বা গো (Go) অ্যাপ রান করতে গিয়ে এরর খেলেন: `EADDRINUSE: port already in use :8080`। এই কমান্ড দিয়ে আপনি দেখতে পারবেন ৮০৮০ পোর্টটি কোন প্রসেস আইডি (PID) দখল করে বসে আছে। তারপর `kill -9 <PID>` দিয়ে পোর্ট খালি করতে পারবেন।
-
-
-
-### SSH সার্ভার সিকিউরিটি হার্ডেনিং (`/etc/ssh/sshd_config`)
-
-ডিফল্ট লিনাক্স সার্ভার হ্যাকারদের প্রধান টার্গেট থাকে। ব্রুট ফোর্স অ্যাটাক ঠেকানোর প্রো-সেটিংস:
-
-1. `PermitRootLogin no`: হ্যাকাররা রুট ইউজারের নাম জানে, তাই সরাসরি রুটে লগইন অপশন অফ করে দেওয়া হলো। ইউজার প্রথমে নিজের নামে ঢুকবে, তারপর `sudo su` হবে।
-2. `PasswordAuthentication no`: পাসওয়ার্ড দিয়ে ঢোকার সিস্টেম টোটাল বন্ধ। শুধুমাত্র SSH Key (Public/Private Key) থাকলেই সার্ভারে ঢোকা যাবে। বট বা পাসওয়ার্ড ক্র্যাকিং অ্যাটাক এখানে এসে ১০০% ব্যর্থ হয়।
-
-* *(সেটিংস চেঞ্জের পর `sudo systemctl restart ssh` দিতে হবে)*।
-
-### রিমোট ডাটা ট্রান্সফার (SCP vs Rsync)
-
-* `scp`: এটি জাস্ট SSH প্রোটোকলের ওপর ফাইল কপি করে। প্রতিবার রান করলে পুরো ফাইল নতুন করে পাঠায়।
 ```bash
-scp -r ./my-project user@192.168.1.10:/var/www/
+find [কোথায় খুঁজবেন] [কীভাবে খুঁজবেন/শর্ত] [ফাইল বা ফোল্ডারের নাম]
+
+```
+
+* **বর্তমান ডিরেক্টরিতে নির্দিষ্ট নামের ফাইল খোঁজা:**
+```bash
+find . -name "filename.txt"
 
 ```
 
 
-* `rsync`: এটি রিয়েল-টাইম প্রোডাকশন ডেপ্লয়মেন্টের কিং। এর ডেল্টা অ্যালগরিদম ফাইল অ্যানালাইসিস করে দেখে সোর্স আর ডেস্টিনেশনের মধ্যে কী তফাত আছে। যদি ১০ জিবি ফাইলের মধ্যে মাত্র ২ লাইনের কোড চেঞ্জ হয়, তবে এটি শুধু ওই ২ লাইনের ডেটা ট্রান্সফার করবে।
+*(এখানে `.` নির্দেশ করে বর্তমান ডিরেক্টরি)*
+* **কেস-ইনসেনসিটিভ (Case-insensitive) খোঁজা:**
+ছোট হাতের বা বড় হাতের অক্ষরের পার্থক্য না রেখে খুঁজতে `-iname` ব্যবহার করা হয়:
 ```bash
-rsync -avz --dry-run ./dist/ user@192.168.1.10:/var/www/html/
+find . -iname "filename.txt"
 
 ```
 
 
-* `-a` (Archive): ফাইলের পারমিশন, ওনারশিপ, গ্রুপ, মডিফিকেশন টাইম হুবহু অপরিবর্তিত রেখে রিমোট সার্ভারে পেস্ট করে।
-* `-v` (Verbose): টার্মিনালে লাইভ প্রগ্রেস ও ফাইলের নাম দেখায়।
-* `-z` (Compress): নেটওয়ার্ক লাইনে পাঠানোর আগে ডেটা জিপ বা কম্প্রেস করে নেয়, ফলে স্লো ইন্টারনেটেও দ্রুত ট্রান্সফার হয়।
-* `--dry-run` (সেফটি ফার্স্ট): প্রোডাকশনে কোনো ফাইল ওভাররাইট বা ডিলিট করার আগে এটি দিয়ে একটি ডামি রান করা হয়। এটি কমান্ডটি একচুয়ালি এক্সিকিউট না করে আপনাকে একটি রিপোর্ট দেবে যে কমান্ডটি চালালে কোন কোন ফাইল এফেক্টেড হতো। কোনো ভুল পাথ থাকলে তা ফাইল নষ্ট করার আগেই ধরা পড়ে যায়।
+* **নির্দিষ্ট ফোল্ডারের ভেতরে ফোল্ডার বা ফাইল খোঁজা:**
+```bash
+find /home/user/Documents -name "report.pdf"
+
+```
+
+
+
+---
+
+### ২. Intermediate Usage (মধ্যবর্তী পর্যায়)
+
+#### টাইপ অনুযায়ী আলাদা করা (`-type`)
+
+* **শুধু ফাইল (Files) খুঁজতে:**
+```bash
+find . -type f -name "*.txt"
+
+```
+
+
+* **শুধু ডিরেক্টরি (Directories/Folders) খুঁজতে:**
+```bash
+find . -type d -name "project*"
+
+```
+
+
+
+#### সাইজ বা আকার অনুযায়ী খোঁজা (`-size`)
+
+* **১০ মেগাবাইটের চেয়ে বড় ফাইল খুঁজতে:**
+```bash
+find . -type f -size +10M
+
+```
+
+
+* **১ গিগাবাইটের চেয়ে ছোট ফাইল খুঁজতে:**
+```bash
+find . -type f -size -1G
+
+```
+
+
+* **একদম ফাঁকা (Empty) ফাইল বা ফোল্ডার খুঁজতে:**
+```bash
+find . -empty
+
+```
+
+
+
+#### সময় অনুযায়ী খোঁজা (`-mtime`, `-atime`)
+
+* **গত ৭ দিনে পরিবর্তন (Modify) হওয়া ফাইল খুঁজতে:**
+```bash
+find . -type f -mtime -7
+
+```
+
+
+* **৩০ দিনের বেশি পুরনো ফাইল খুঁজতে:**
+```bash
+find . -type f -mtime +30
+
+```
+
+
+
+---
+
+### ৩. Advanced Usage (অ্যাডভান্সড পর্যায়)
+
+#### পারমিশন এবং ওনারশিপ অনুযায়ী খোঁজা
+
+* **৭৭৭ (Read, Write, Execute all) পারমিশন থাকা ফাইল খুঁজতে:**
+```bash
+find . -type f -perm 777
+
+```
+
+
+* **নির্দিষ্ট কোনো ইউজার (User) বা গ্রুপের ফাইল খুঁজতে:**
+```bash
+find . -user root
+
+```
+
+
+
+#### সার্চের গভীরতা নির্দিষ্ট করা (`-maxdepth`)
+
+সাব-ডিরেক্টরির গভীরে না গিয়ে শুধু প্রথম বা নির্দিষ্ট লেভেল পর্যন্ত খুঁজতে:
+
+```bash
+find . -maxdepth 1 -type f -name "*.sh"
+
+```
+
+#### বহুমাত্রিক শর্ত যুক্ত করা (Logical Operators)
+
+* **AND অপারেশন (txt ফাইল এবং ১০০KB এর কম):**
+```bash
+find . -type f -name "*.txt" -size -100k
+
+```
+
+
+* **OR অপারেশন (txt অথবা pdf ফাইল):**
+```bash
+find . -type f \( -name "*.txt" -o -name "*.pdf" \)
+
+```
+
+
+
+#### অ্যাকশন চালানো (`-exec`)
+
+`find` দিয়ে খুঁজে পাওয়ার পর সেই ফাইলগুলোর ওপর সরাসরি অন্য কোনো কাজ করা যায়।
+
+* **খুঁজে পাওয়া সব `.tmp` ফাইল মুছে ফেলা:**
+```bash
+find . -type f -name "*.tmp" -exec rm -f {} \;
+
+```
+
+
+*(এখানে `{}` প্রতীকটি খুঁজে পাওয়া প্রতিটি ফাইল নির্দেশ করে এবং `\;` কমান্ডের সমাপ্তি বোঝায়)*
+* **সব `.sh` ফাইলের পারমিশন পরিবর্তন করা:**
+```bash
+find . -type f -name "*.sh" -exec chmod +x {} \;
+
+```
+
+
+
+---
+
+#### সংক্ষেপে গুরুত্বপূর্ণ চিহ্নের গাইড
+
+| ফ্লাগ       | বিবরণ                              |
+| --------- | --------------------------------- |
+| `-type f` | শুধুমাত্র ফাইল খুঁজবে                     |
+| `-type d` | শুধুমাত্র ডিরেক্টরি খুঁজবে                   |
+| `-name`   | ফাইলের নাম মিলিয়ে খুঁজবে (Case sensitive)  |
+| `-iname`  | নাম মিলিয়ে খুঁজবে (Case insensitive)     |
+| `-size`   | ফাইলের সাইজ অনুযায়ী খুঁজবে (`k`, `M`, `G`) |
+| `-mtime`  | মোডিফিকেশনের সময় ধরে খুঁজবে (দিনে)           |
+| `-exec`   | খুঁজে পাওয়া ফাইলের ওপর অন্য কমান্ড রান করবে   |
 
 ## Bash
 ```bash
