@@ -1,9 +1,6 @@
 # Class 11
 
 ## Today's Topic
-- Pipelines (cat, sort, uniq, grep, head, tail, tee)
-  - grep -v -n -c \* -r
-  - tail -f -n
 - Working with Commands (type, which, man, whatis, alias)
   - which -> show path of a command
   - type -> show type of a command

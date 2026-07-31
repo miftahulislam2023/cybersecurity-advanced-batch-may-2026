@@ -92,3 +92,35 @@
 9. `passwd`
 10. `groups goku`
 11. `sudo usermod -aG sudo goku`
+
+### Class 11
+- Working with Commands (type, which, man, whatis, alias)
+  - which -> show path of a command
+  - type -> show type of a command
+  - man -> show manual of a command
+  - whatis -> show one-line description of a command
+  - alias -> create an alias for a command
+- System Usages
+  - top
+  - htop
+  - btop
+  - uptime
+  - df -h -i
+  - free -m
+  - nload
+- Installing Softwares
+  - sudo apt install apache
+  - apt
+    - search -> package search in repositories
+    - install -> install a package
+    - remove -> remove a package
+    - autoremove -> remove unnecessary packages
+    - dist-upgrade -> upgrade the system
+    - show [package-name] -> show information about a package
+- Text Editing Basic
+  - nano
+  - vim
+  - mousepad
+- find
+
+### Class 12

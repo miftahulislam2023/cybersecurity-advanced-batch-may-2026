@@ -1,0 +1,16 @@
+# Today's Topics
+- Pipelines (cat, sort, uniq, grep, head, tail, tee)
+  - grep (global regular expression print) -> pattern searching using regular expression
+    - -v -> invert match
+    - -n -> line number
+    - -c -> count
+    - -r -> recursive search
+  - tail -> show last lines
+  -  -f -n -> follow tail
+  -  head -> show first lines
+  -  tee -> simultaneously output to file and screen
+- User and Group Management
+  - adduser
+  - passwd
+  - groups
+  - usermod
