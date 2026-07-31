@@ -19,9 +19,6 @@
     - PasswordAuthentication no
   - rsync -avz --dry-run
   - scp
-- cURL & wget
-  - curl https://google.com
-  - wget https://miftahcoding.com
 - journalctl
   - -u apache
   - -f
