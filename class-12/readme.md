@@ -20,7 +20,7 @@
   - getent passwd miftah
   - man 5 passwd
 
-## /etc/passwd - The 7 Columns of `/etc/passwd`
+## Structure of `/etc/passwd`
 
 The `/etc/passwd` file stores essential account information for Linux/Unix systems. Each line represents a user account, with information separated into seven distinct fields.
 
