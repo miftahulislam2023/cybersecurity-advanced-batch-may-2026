@@ -6,6 +6,13 @@
   - tools for investigation
   - tools for exploration and penetration testing
 
+## Shells
+- zsh
+- bash
+- fish
+- csh
+- powershell -> windows
+
 ## Tools
 ### Information Gathering & OSINT
 
