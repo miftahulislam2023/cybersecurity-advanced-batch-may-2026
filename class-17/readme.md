@@ -68,3 +68,61 @@ nmap -A scanme.nmap.org
 * **Version:** সার্ভিসের সঠিক ভার্সন শনাক্তকরণের ওপর কাজ করে।
 * **Operating system fingerprinting:** স্ক্যান চলাকালীন আচরণ পর্যবেক্ষণের ওপর ভিত্তি করে টার্গেট সিস্টেমে কোন অপারেটিং সিস্টেম (OS) চলছে তার একটি সম্ভাব্য ধারণা প্রদান করে।
 * **Traceroute:** স্ক্যানিং মেশিন থেকে টার্গেট ডিভাইস পর্যন্ত নেটওয়ার্ক পাথ ম্যাপ করে এবং মাঝে কতগুলো নেটওয়ার্ক হপ (hop) রয়েছে তা শনাক্ত করে।
+
+## Important Notes
+1. Nmap uses raw IP packets in novel ways to determine
+    1. What **hosts** are available on the network, 
+    2. What **services** (application name and version) those hosts are offering, 
+    3. What **operating systems** (and OS versions) they are running
+    4. What type of **packet filters/firewalls** 
+2. The state is either-
+   1. open - Open means that an application on the target machine is listening for connections/packets on that port
+   2. filtered - Filtered means that a firewall, filter, or other network obstacle is blocking the port so that Nmap cannot tell whether it is open or closed
+   3. closed - Closed ports have no application listening on them, though they could open up at any time
+   4. unfiltered - Ports are classified as unfiltered when they are responsive to Nmap's probes, but Nmap cannot determine whether they are open or closed. 
+> `Nmap reports the state combinations open|filtered and closed|filtered when it cannot determine which of the two states describe a port.`
+
+> A typical Nmap scan is shown in Example 1. The only Nmap arguments used in this example are `-A`, to enable OS and version detection, script scanning, and traceroute; `-T4` for faster execution; and then the hostname.
+
+#### Example 1. A representative Nmap scan
+
+```bash
+nmap -A -T4 scanme.nmap.org
+Nmap scan report for scanme.nmap.org (74.207.244.221)
+Host is up (0.029s latency).
+rDNS record for 74.207.244.221: li86-221.members.linode.com
+Not shown: 995 closed ports
+PORT     STATE    SERVICE     VERSION
+22/tcp   open     ssh         OpenSSH 5.3p1 Debian 3ubuntu7 (protocol 2.0)
+| ssh-hostkey: 1024 8d:60:f1:7c:ca:b7:3d:0a:d6:67:54:9d:69:d9:b9:dd (DSA)
+|_2048 79:f8:09:ac:d4:e2:32:42:10:49:d3:bd:20:82:85:ec (RSA)
+80/tcp   open     http        Apache httpd 2.2.14 ((Ubuntu))
+|_http-title: Go ahead and ScanMe!
+646/tcp  filtered ldp
+1720/tcp filtered H.323/Q.931
+9929/tcp open     nping-echo  Nping echo
+Device type: general purpose
+Running: Linux 2.6.X
+OS CPE: cpe:/o:linux:linux_kernel:2.6.39
+OS details: Linux 2.6.39
+Network Distance: 11 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:kernel
+
+TRACEROUTE (using port 53/tcp)
+HOP RTT      ADDRESS
+[Cut first 10 hops for brevity]
+11  17.65 ms li86-221.members.linode.com (74.207.244.221)
+
+Nmap done: 1 IP address (1 host up) scanned in 14.40 seconds
+```
+
+## TCP vs UDP
+1. Use cases
+2. Difference
+
+## TCP Three-way handshake
+- It happens before data transfer begins
+- Three steps
+  - SYN -> Synchronize
+  - SYN-ACK -> Synchronize Acknowlegde
+  - ACK -> Acknowlegde
