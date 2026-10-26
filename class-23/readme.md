@@ -11,4 +11,3 @@ Ans:
 2. How can we measure total TTL decremented to reach a site and how can we see the individual router ip addresses?
 Ans: 
 3. How can we get DNS records of a domain?
-4. 
