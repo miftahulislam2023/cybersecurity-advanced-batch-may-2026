@@ -5,7 +5,6 @@
 2. Transport Layer, Application Layer (Session Layer, Presentation Layer, Application Layer)
 3. TCP Three Way Handshake, UDP, ARP, DNS, HTTP
 
-
 ### Ports
 - 22 (SSH)
 - 23 (Telnet)

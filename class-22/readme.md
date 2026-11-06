@@ -54,6 +54,7 @@
     AS	AS150156
     AS name	99it
 3. https://www.empirepremium.store/wp-login.php?redirect_to=https%3A%2F%2Fempirepremium.store%2Fwp-admin%2F&reauth=1
+4. https://www.renewmestore.com/
    
 ### ASCII (American Standard Code for Information Interchange)
 
